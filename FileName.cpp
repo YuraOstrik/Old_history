@@ -1,101 +1,64 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class Point
-{
-	int x;
-	int y;
+class Car {
+	char* model;
+	char* country;
+	char* colour;
+	int year;
+	double price;
 
 public:
-	Point() {}
-	Point(int a, int b);
+	Car();
+	Car(const char* model, const char* country, const char* colour, int year, double price);
 	void Print();
-	
-	Point operator+ (Point& b)
-	{
-		Point c;
-		c.x = (this->x * b.y) + (this->y * b.x);
-		c.y = this->y * b.y;
-		return c;
-	}
-	
-	Point operator- (Point& b)
-	{
-		Point c;
-		c.x = (this->x * b.y) - (this->y * b.x);
-		c.y = this->y * b.y;
-		return c;
-	}
-	Point operator* (Point& b)
-	{
-		Point c;
-		c.x = this->x * b.x;
-		c.y = this->y * b.y;
-		return c;
-	}
-	Point operator/ (Point& b)
-	{
-		Point c;
-		c.x = this->x * b.y;
-		c.y = this->y * b.x;
-		return c;
-	}
+	~Car();
 
 
-	Point operator+ (int b)
-	{
-		Point c;
-		c.x = this->x + (this->y * b);
-		c.y = this->y;
-		return c;
-	}
-
-	Point operator- (int b)
-	{
-		Point c;
-		c.x = this->x - (this->y * b);
-		c.y = this->y;
-		return c;
-	}
-	Point operator* (int b)
-	{
-		Point c;
-		c.x = this->x * b;
-		c.y = this->y;
-		return c;
-	}
-	Point operator/ (int b)
-	{
-		Point c;
-		c.x = this->x;
-		c.y = this->y * b;
-		return c;
-	}
 };
 
-Point::Point(int a, int b)
+
+
+Car::Car()
 {
-	x = a;
-	y = b;
+	model = country = colour = nullptr;
+	year = price = 0;
 }
 
-void Point::Print()
+Car::Car(const char* a, const char* b, const char* c, int t, double r)
 {
-	cout << "X: " << x << "\tY: " << y << endl;
+	model = new char[strlen(a) + 1];
+	strcpy_s(model, strlen(a) + 1, a);
+
+	country = new char[strlen(b) + 1];
+	strcpy_s(country, strlen(b) + 1, b);
+
+	colour = new char[strlen(c) + 1];
+	strcpy_s(colour, strlen(c) + 1, c);
+
+	year = t;
+	price = r;
+}
+
+void Car::Print()
+{
+	cout << "Model ---> " << model << "\t Country ---> " << country << "\t Colour --> " << colour << "\t Age ---> " << year << "\t " << price << endl;
+}
+
+Car::~Car()
+{
+	delete[] model;
+	delete[] country;
+	delete[] colour;
+
+	cout << "Destruct...\n";
 }
 
 
-int main()
-{
-	Point a(3, 4), b(1, 5);
 
-	/*Point c = a + b;
-	c.Print(); */
 
-	/*Point c = a - b;
-	c.Print();*/
 
-	Point c = a + ;
-	c.Print();
+int main() {
+	Car a("Mers", "Chine", "green", 10, 59937.6);
+	a.Print();
 }
-
